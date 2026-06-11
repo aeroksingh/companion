@@ -52,8 +52,12 @@ jobs:
 
       - name: Bundle sidecar exe
         working-directory: sidecar
-        run: pkg dist/index.js --target node18-win-x64 --output ../src-tauri/sidecars/companion-pipeline-x86_64-pc-windows-msvc.exe
+        run: |
+          pkg dist/index.js `
+            --target node18-win-x64 `
+            --output ../src-tauri/sidecars/companion-pipeline-x86_64-pc-windows-msvc.exe
 
+      
       # ── 8. Build Tauri app ────────────────────────────────────
       - name: Build Tauri
         run: npm run tauri build
