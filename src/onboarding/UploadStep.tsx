@@ -14,14 +14,7 @@ export function UploadStep({ onFileSelected, onBack }: Props) {
   const [selectedPath, setSelectedPath] = useState<string | null>(null);
 
   const handleBrowse = async () => {
-    const result = await open({
-      multiple: false,
-      filters: [{ name: "Images", extensions: ["png", "jpg", "jpeg", "webp"] }],
-    });
-    if (result && typeof result === "string") {
-      setSelectedPath(result);
-      setPreview(result);
-    }
+    document.getElementById("file-input")?.click();
   };
 
   const handleDrop = useCallback((e: React.DragEvent) => {
