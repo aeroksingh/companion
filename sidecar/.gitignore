@@ -1,0 +1,28 @@
+# Dependencies
+node_modules/
+sidecar/node_modules/
+sidecar/dist/
+
+# Build outputs
+dist/
+src-tauri/target/
+
+# Keep placeholder sidecar in git so Tauri doesn't error on first clone
+# !src-tauri/sidecars/
+
+# DB
+*.db
+*.db-wal
+*.db-shm
+
+# Env
+.env
+.env.local
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/settings.json
+.idea/

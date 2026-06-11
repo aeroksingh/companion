@@ -1,0 +1,57 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --companion-bg: #1a1a2e;
+  --companion-surface: #16213e;
+  --companion-accent: #6366f1;
+  --companion-accent-light: #818cf8;
+  --companion-text: #e2e8f0;
+  --companion-text-muted: #94a3b8;
+  --companion-border: rgba(255,255,255,0.08);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: transparent;
+  color: var(--companion-text);
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Overlay window — always transparent bg */
+body.overlay-window {
+  background: transparent !important;
+  overflow: hidden;
+}
+
+/* Scrollbar styling for center window */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--companion-surface);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--companion-border);
+  border-radius: 3px;
+}
+
+/* Pixel-crisp image rendering */
+.pixel-art {
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+/* Utility: no pointer events */
+.no-interact {
+  pointer-events: none;
+}

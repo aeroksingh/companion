@@ -1,0 +1,64 @@
+name: Build Companion
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: x86_64-pc-windows-msvc
+
+      - name: Cache Rust
+        uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: src-tauri
+
+      - name: Install frontend deps
+        run: npm ci
+
+      - name: Install sidecar deps
+        working-directory: sidecar
+        run: npm ci
+
+      - name: Build sidecar TypeScript
+        working-directory: sidecar
+        run: npm run build
+
+      - name: Install pkg globally
+        run: npm install -g pkg
+
+      - name: Bundle sidecar exe
+        working-directory: sidecar
+        shell: pwsh
+        run: pkg dist/index.js --target node18-win-x64 --output ..\src-tauri\sidecars\companion-pipeline-x86_64-pc-windows-msvc.exe
+
+      - name: Build Tauri
+        run: npm run tauri build
+        env:
+          TAURI_SIGNING_PRIVATE_KEY: ""
+          TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ""
+
+      - name: Upload installer
+        uses: actions/upload-artifact@v4
+        with:
+          name: Companion-Windows-Installer
+          path: |
+            src-tauri/target/release/bundle/nsis/*.exe
+            src-tauri/target/release/bundle/msi/*.msi
+          retention-days: 30
