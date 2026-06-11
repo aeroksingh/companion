@@ -1,0 +1,15 @@
+import { invoke as tauriInvoke } from "@tauri-apps/api/core";
+
+export async function invoke<T = void>(
+  cmd: string,
+  args?: Record<string, unknown>
+): Promise<T> {
+  try {
+    return await tauriInvoke<T>(cmd, args);
+  } catch (error) {
+    if (import.meta.env.DEV) {
+      console.error(`[invoke:${cmd}]`, error);
+    }
+    throw error;
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "productName": "Companion",
+  "version": "1.0.0",
+  "identifier": "com.companion.app",
+  "build": {
+    "frontendDist": "../dist",
+    "devUrl": "http://localhost:1420",
+    "beforeDevCommand": "npm run dev",
+    "beforeBuildCommand": "npm run build"
+  },
+  "bundle": {
+    "active": true,
+    "targets": ["nsis"],
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ],
+    "resources": [],
+    "externalBin": [
+      "sidecars/companion-pipeline"
+    ],
+    "windows": {
+      "nsis": {
+        "installMode": "currentUser"
+      }
+    }
+  },
+  "app": {
+    "windows": [
+      {
+        "label": "overlay",
+        "title": "Companion",
+        "width": 160,
+        "height": 160,
+        "x": 100,
+        "y": 100,
+        "transparent": true,
+        "decorations": false,
+        "alwaysOnTop": true,
+        "skipTaskbar": true,
+        "resizable": false,
+        "focus": false,
+        "visible": false,
+        "url": "index.html"
+      },
+      {
+        "label": "center",
+        "title": "Companion Center",
+        "width": 900,
+        "height": 620,
+        "minWidth": 760,
+        "minHeight": 520,
+        "visible": false,
+        "center": true,
+        "decorations": true,
+        "resizable": true,
+        "url": "index.html"
+      },
+      {
+        "label": "onboarding",
+        "title": "Welcome to Companion",
+        "width": 680,
+        "height": 540,
+        "visible": false,
+        "center": true,
+        "decorations": false,
+        "resizable": false,
+        "url": "index.html"
+      }
+    ],
+    "trayIcon": {
+      "iconPath": "icons/tray.png",
+      "iconAsTemplate": false,
+      "menuOnLeftClick": false,
+      "tooltip": "Companion"
+    },
+    "security": {
+      "csp": null
+    }
+  },
+  "plugins": {}
+}
