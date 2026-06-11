@@ -4,9 +4,8 @@
   "private": true,
   "type": "commonjs",
   "scripts": {
-    "build": "tsc",
-    "start": "node dist/index.js",
-    "bundle": "pkg dist/index.js --target node18-win-x64 --output ../src-tauri/sidecars/companion-pipeline-x86_64-pc-windows-msvc.exe"
+    "build": "tsc --skipLibCheck",
+    "start": "node dist/index.js"
   },
   "dependencies": {
     "@imgly/background-removal-node": "^1.4.3",
@@ -14,7 +13,6 @@
   },
   "devDependencies": {
     "@types/node": "^20.14.0",
-    "pkg": "^5.8.1",
     "typescript": "^5.4.5"
   }
 }
