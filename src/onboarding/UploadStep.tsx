@@ -1,6 +1,7 @@
 import { useCallback, useState } from "react";
-import { open } from "@tauri-apps/plugin-dialog";
 import { motion } from "framer-motion";
+
+
 
 interface Props {
   onFileSelected: (path: string) => void;

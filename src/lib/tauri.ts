@@ -7,9 +7,7 @@ export async function invoke<T = void>(
   try {
     return await tauriInvoke<T>(cmd, args);
   } catch (error) {
-    if (import.meta.env.DEV) {
-      console.error(`[invoke:${cmd}]`, error);
-    }
+    console.error(`[invoke:${cmd}]`, error);
     throw error;
   }
 }
