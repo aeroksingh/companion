@@ -1,5 +1,6 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const sharp = require("sharp");
+// @ts-ignore
+import sharp from "sharp";
 import * as fs from "fs/promises";
 import * as path from "path";
 
@@ -87,11 +88,9 @@ async function cropToSquare(inputPath: string): Promise<Buffer> {
 
 async function removeBackground(input: Buffer): Promise<Buffer> {
   try {
-    const { removeBackground: removeBg } = require("@imgly/background-removal-node");
-    const blob = new Blob([input], { type: "image/png" });
-    const result = await removeBg(blob);
-    const ab = await result.arrayBuffer();
-    return Buffer.from(ab);
+      const { removeBackground: removeBg } = require("@imgly/background-removal-node");
+      const result = await removeBg(input);
+      return Buffer.from(result);
   } catch {
     return input;
   }
