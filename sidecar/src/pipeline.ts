@@ -87,16 +87,12 @@ async function cropToSquare(inputPath: string): Promise<Buffer> {
 
 async function removeBackground(input: Buffer): Promise<Buffer> {
   try {
-    // Try @imgly/background-removal-node
-    const { removeBackground: removeBg } = await import(
-      "@imgly/background-removal-node"
-    );
+    const { removeBackground: removeBg } = require("@imgly/background-removal-node");
     const blob = new Blob([input], { type: "image/png" });
     const result = await removeBg(blob);
-    const arrayBuffer = await result.arrayBuffer();
-    return Buffer.from(arrayBuffer);
+    const ab = await result.arrayBuffer();
+    return Buffer.from(ab);
   } catch {
-    // Fallback: just use the original (no BG removal)
     return input;
   }
 }
