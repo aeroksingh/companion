@@ -1,4 +1,5 @@
 use std::sync::{Arc, Mutex};
+use tauri::Manager;
 use std::time::{Duration, Instant};
 use tauri::{AppHandle, Emitter};
 

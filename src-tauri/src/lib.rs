@@ -41,7 +41,7 @@ pub fn run() {
                 }
             } else {
                 // Restore overlay
-                overlay::restore_and_show(app)?;
+                overlay::restore_and_show(&app.handle().clone()).ok();
                 // Start FSM
                 state::fsm::start_fsm(app_handle);
             }
