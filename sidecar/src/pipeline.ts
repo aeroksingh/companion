@@ -1,4 +1,5 @@
-import sharp from "sharp";
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const sharp = require("sharp");
 import * as fs from "fs/promises";
 import * as path from "path";
 
